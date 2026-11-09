@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CGaIP-6_TextureMapping/CGaIP-6_TextureMapping.vcxproj" Id="b9d51daf-1012-4abf-9423-406cd4f04451" />
+</Solution>
