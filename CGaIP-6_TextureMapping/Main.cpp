@@ -78,7 +78,7 @@ unsigned int loadTexture(const char* path) {
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data); // Закачуємо чисті байти розпакованого зображення безпосередньо у відеокарту (VRAM)
 		glGenerateMipmap(GL_TEXTURE_2D); // Автоматично генеруємо зменшені копії текстури (міп-мапи) для оптимізації рендерингу
 
-		stbi_image_free(data);
+		stbi_image_free(data); // Звільняємо оперативну пам'ять (ОЗУ) комп'ютера, оскільки відеокарта вже скопіювала дані собі
 	}
 	else std::cout << "Error: non loading the texture on the path" << std::endl;
 
@@ -279,8 +279,8 @@ int main() {
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection)); // Передаємо перспективну матрицю проєкції у вершинний шейдер
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(view)); // Передаємо матрицю виду у вершинний шейдер
 		glBindVertexArray(squre.VAO); // Вмикаємо налаштування фігури
-		glActiveTexture(GL_TEXTURE0); // Активуємо нульовий текстурний юніт відеокарти
-		glBindTexture(GL_TEXTURE_2D, itTexture); // Прив'язуємо нашу завантажену текстуру до активного юніту
+		glActiveTexture(GL_TEXTURE0); // Активуємо нульовий текстурний слот відеокарти
+		glBindTexture(GL_TEXTURE_2D, itTexture); // Прив'язуємо нашу завантажену текстуру до активного слоту
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0); // Даємо команду намалювати фігуру куб
 
 		// Очищення, для того, щоб інші об'єкти не малювалися цим шейдером
